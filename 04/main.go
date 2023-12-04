@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -40,7 +41,6 @@ func parts(input []string) {
 	for i, iv := range input {
 		m := map[int]int{}
 		cardcount[i]++
-		score := -1
 		a := strings.Split(iv, " | ")
 		aa := strings.Split(a[0], ": ")
 		winning := strings.Split(aa[1], " ")
@@ -56,22 +56,17 @@ func parts(input []string) {
 			m[c]++
 		}
 
-		w := 0
+		matches := 0
 		for k, v := range m {
 			if v == 2 && k != 0 {
-				w++
-				if score == -1 {
-					score = 1
-				} else {
-					score *= 2
-				}
+				matches++
 			}
 		}
-		if score != -1 {
-			count1 += score
-		}
-		for j := 1; j <= w; j++ {
+		for j := 1; j <= matches; j++ {
 			cardwon[i] = append(cardwon[i], i+j)
+		}
+		if matches > 0 {
+			count1 += int(math.Pow(2, float64(matches-1)))
 		}
 	}
 
