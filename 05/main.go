@@ -29,26 +29,20 @@ func main() {
 
 	file.Close()
 
-	//part1(input)
+	part1(input)
 	part2(input)
 }
 
 func part1(input []string) {
-	count := -1
-
 	a := strings.Split(strings.TrimPrefix(input[0], "seeds: "), " ")
-	fmt.Println(a)
+	count := -1
 
 	for _, ss := range a {
 		s, _ := strconv.Atoi(ss)
-		fmt.Println(s)
 		roundfinished := false
 
 		for i := 2; i < len(input); i++ {
-			if input[i] == "" {
-				continue
-			}
-			if !unicode.IsDigit(rune(input[i][0])) {
+			if input[i] == "" || !unicode.IsDigit(rune(input[i][0])) {
 				roundfinished = false
 				continue
 			}
@@ -76,10 +70,8 @@ func part1(input []string) {
 }
 
 func part2(input []string) {
-	count := -1
-
 	a := strings.Split(strings.TrimPrefix(input[0], "seeds: "), " ")
-	fmt.Println(a)
+	count := -1
 
 	for k := 0; k < len(a); k += 2 {
 		s, _ := strconv.Atoi(a[k])
@@ -93,15 +85,9 @@ func part2(input []string) {
 		for currentDoneLength < sl {
 			currentStart = s + currentDoneLength
 			currentLength = sl - currentDoneLength
-			fmt.Println("Next round ----")
-			fmt.Println(currentStart)
-			fmt.Println(currentLength)
 
 			for i := 2; i < len(input); i++ {
-				if input[i] == "" {
-					continue
-				}
-				if !unicode.IsDigit(rune(input[i][0])) {
+				if input[i] == "" || !unicode.IsDigit(rune(input[i][0])) {
 					roundfinished = false
 					continue
 				}
@@ -120,13 +106,11 @@ func part2(input []string) {
 						currentLength = l
 					}
 					roundfinished = true
-					fmt.Println("A", currentStart, currentLength, currentDoneLength)
 					continue
 				}
 
 				if source >= currentStart && source <= currentStart+currentLength-1 {
 					currentLength = source - currentStart
-					fmt.Println("B", currentStart, currentLength, currentDoneLength)
 				}
 			}
 			if count == -1 || currentStart < count {
@@ -134,7 +118,6 @@ func part2(input []string) {
 			}
 			currentDoneLength += currentLength
 		}
-
 	}
 
 	fmt.Println(count)
