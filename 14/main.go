@@ -66,9 +66,9 @@ func part2(input []string) {
 		i++
 	}
 	fmt.Println("Cycle", i-x)
-	fmt.Println("Offset", x)
-	fmt.Println("OtherSideOffset", (1000000000-x)%(i-x))
-	fmt.Println("Total Cycles", (1000000000-x)%(i-x)+x)
+	fmt.Println("Start Offset", x)
+	fmt.Println("End Offset", (1000000000-x)%(i-x))
+	fmt.Println("Total Tilt Cycles to solution", (1000000000-x)%(i-x)+x)
 
 	cycles := (1000000000-x)%(i-x) + x
 
